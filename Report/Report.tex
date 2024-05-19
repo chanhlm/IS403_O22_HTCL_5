@@ -1,0 +1,416 @@
+\documentclass{ieeeojies}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+% \usepackage{caption}
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\title{FORECASTING THE STOCK PRICES OF VIETNAMESE REAL ESTATE COMPANIES USING STATISTICAL MODELS AND MACHINE LEARNING ALGORITHMS}
+
+\author{\uppercase{Tran Thi Kim Anh}\authorrefmark{1},
+\uppercase{Phi Quang Thanh\authorrefmark{2}, and Le Minh Chanh}\authorrefmark{3}}
+
+\address[1]{Faculty of Information Systems, University of Information Technology, (e-mail: 21520596@gm.uit.edu.vn)}
+\address[2]{Faculty of Information Systems, University of Information Technology, (e-mail: 21521449@gm.uit.edu.vn)}
+\address[3]{Faculty of Information Systems, University of Information Technology, (e-mail: 21521882@gm.uit.edu.vn)}
+
+\markboth
+{Author \headeretal: Tran Thi Kim Anh, Phi Quang Thanh, Le Minh Chanh}
+{Author \headeretal: Tran Thi Kim Anh, Phi Quang Thanh, Le Minh Chanh}
+
+\begin{abstract}
+The stock market serves as a cornerstone of Vietnam's finance, providing a platform for investors to trade securities such as stocks, bonds, and derivatives. Developing predictive models for stock prices will aid investors in making decisions more efficiently. In this research, we utilize statistical and machine learning algorithms, as well as deep learning such as Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent neural network (RNN), Holt-Winters, TimesNet to forecast the stock prices of three prominent real estate companies: Vinhomes (JSC), Novaland (NVL), and Nam Long Corp (NLG). By leveraging a diverse array of methodologies, we aim to gain insights into the behavior of these stocks and enhance investors' ability to make well-informed decisions in the dynamic real estate market.
+\end{abstract}
+
+\begin{keywords}
+\textbf{Keywords} - Linear Regression, SVM, ARIMA, LSTM, GRU, RNN, Holt-Winters, TimesNet.
+\end{keywords}
+
+\titlepgskip=-15pt
+
+\maketitle
+\section{Introduction}
+Vietnam's stock market holds a pivotal position in the country's financial landscape, serving as a key platform for investors to engage in the trading of various securities, including stocks, bonds, and derivatives. With its dynamic nature and significant impact on the economy, the stock market plays a crucial role in facilitating capital mobilization, fostering business growth, and contributing to overall economic development.\\
+In recent years, the adoption of predictive modeling techniques has gained traction within the Vietnamese stock market ecosystem. These predictive models, leveraging statistical and machine learning algorithms, enable investors to forecast stock prices with greater accuracy and efficiency. By harnessing the power of data-driven insights, investors can make more informed decisions, mitigate risks, and seize lucrative investment opportunities.\\
+In this research, we focus on predicting the stock prices of three prominent companies in the Vietnamese real estate sector: Vinhomes, Novaland, and Nam Long Corp. Through the application of various predictive algorithms, including but not limited to Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent neural network (RNN), Holt-winters, and TimesNet, we aim to provide valuable insights into the future behavior of these stocks. By examining historical data and market trends, we seek to enhance investors' understanding of the dynamics influencing stock prices in the Vietnamese real estate market.\\
+By leveraging these predictive models, investors can gain a competitive edge in the stock market, optimize their investment strategies, and navigate the complexities of the Vietnamese real estate sector with confidence and precision. Through this research endeavor, we strive to contribute to the advancement of predictive modeling techniques within Vietnam's stock market, ultimately empowering investors to make informed decisions and achieve their financial objectives. 
+
+\section{Related Works}
+Ghosalkar and Dhage (2018) \cite{b1} presented a study on real estate value prediction using linear regression at the 2018 Fourth International Conference on Computing Communication Control and Automation (ICCUBEA). Their research aimed to assess the efficacy of linear regression in forecasting real estate values, contributing to advancements in real estate valuation methodologies. \\
+Lin, Guo, and Hu (2013) \cite{b2} introduced an SVM-based approach for predicting stock market trends at the 2013 International Joint Conference on Neural Networks (IJCNN). Their research highlights the utilization of Support Vector Machines (SVM) in analyzing financial data for trend prediction. \\
+Ariyo, Adewumi, and Ayo (2014) \cite{b3} presented a study on stock price prediction utilizing the ARIMA (AutoRegressive Integrated Moving Average) model at the 2014 UKSim-AMSS 16th International Conference on Computer Modelling and Simulation. Their research focused on applying time series analysis techniques to forecast stock prices, contributing to advancements in financial modeling methodologies. \\
+Sunny, Maswood, and Alharbi (2020) \cite{b4} introduced a deep learning-based approach for stock price prediction using LSTM (Long Short-Term Memory) and Bi-Directional LSTM models at the 2020 2nd Novel Intelligent and Leading Emerging Sciences Conference (NILES). Their research aimed to leverage advanced neural network architectures to analyze stock market data and forecast price movements, potentially offering enhanced predictive capabilities in financial markets. \\
+Jaiswal and Singh (2022) \cite{b5} proposed a hybrid Convolutional Recurrent (CNN-GRU) model for stock price prediction, leveraging both CNN and GRU architectures. Their research aimed to combine the strengths of CNN for feature extraction and GRU for capturing sequential dependencies, potentially improving the accuracy of stock price forecasts. \\
+Syavasya and Muddana (2021) \cite{b6} developed a machine learning-based time series prediction method using Holt-Winters Exponential Smoothing with Multiplicative Seasonality. Their research aimed to improve forecasting accuracy by incorporating advanced machine learning techniques into traditional time series analysis. 
+\section{Materials}
+\subsection{Dataset}
+The reference datasets used are sourced as follows: The historical stock price data of Vinhomes (VHM), No Va Land Investment Group Corp (NVL) and Nam Long Investment Corp (NLG). The datasets are obtained from the investing.com website, and the data is available within the time range from March 1, 2019, to March 1, 2024. Because the project goal is to predict closing prices, we'll only analyze data from the "Close" column (in VND). The dataset contains the following columns:
+\begin{itemize}
+\item Date: Represents the date when the financial data was recorded.
+\item Price (also known as the Close Price): Refers to the price of the stock at the end of
+exchange.
+\item Open: Illustrate the opening price of the stock at the beginning of the trading day.
+\item High: Represents the highest price reached by the stock during the trading day.
+\item Low: Indicates the lowest price reached by the stock during the trading day.
+\item Vol.: Stands for volume, which represents the number of shares traded during the
+trading day.
+\item Change: Reflects the percentage change in the price of the stock compared to the
+previous trading day.
+\end{itemize}
+\subsection{Descriptive Statistics}
+For this project, we will use Python programming language to visualize data in figures.
+\begin{table}[H]
+\centering
+% \captionsetup{justification=centering}
+\caption{VHM, NVL, NLG’s Descriptive Statistics}
+\begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|}
+\hline
+\rowcolor{red!20} & VHM & NVL & NLG \\ \hline
+Count & 1252 & 1252 & 1252 \\ \hline
+Mean & 62,066 & 43,756 & 31,100\\ \hline
+Std & 11,878 & 25,614 & 10,816\\ \hline
+Min & 38,450 & 10,250 & 14,414\\ \hline
+25\% & 53,900 & 23,350 & 21,509\\ \hline
+50\% & 61,768 & 34,213 & 30,132\\ \hline
+75\% & 71,569 & 76,000 & 37,200\\ \hline
+Max & 88,722 & 92,366 & 63,723\\ \hline
+\end{tabular}
+\end{table}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/VHMboxplot.png}
+\caption{VHM stock price's boxplot}
+\label{fig:1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/VHMhist.png}
+\caption{VHM stock price's histogram}
+\label{fig:2}
+\end{minipage}
+
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/NVLboxplot.png}
+\caption{NVL stock price's boxplot}
+\label{fig:1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/NVLhist.png}
+\caption{NVL stock price's histogram}
+\label{fig:2}
+\end{minipage}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/NLGboxplot.png}
+\caption{NLG stock price's boxplot}
+\label{fig:1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\textwidth}
+\centering
+\includegraphics[width=1\textwidth]{bibliography/material/NLGhist.png}
+\caption{NLG stock price's histogram}
+\label{fig:2}
+\end{minipage}
+\end{figure}
+Based on the data:
+\begin{itemize}
+\item VHM has the highest average at 62,066, followed by NVL at 43,756, and NLG at
+31,100.
+\item NVL has the highest variability with a standard deviation of 25,614.
+\item NVL also has the widest range of values, from 10,250 to 92,366.
+\item NLG has the lowest average and variability.
+\end{itemize}
+Overall, NVL stands out for its high variability and wide range of values, while VHM consistently maintains higher averages. NLG consistently has lower values compared to the other two groups.
+
+\section{Methodology}
+\subsection{Linear Regression}
+Simple linear regression describes the relationship between one variable's magnitude and that of another—for instance, as X increases, Y might also increase, or it could decrease. The difference is that while correlation measures the strength of an association between two variables, regression quantifies the nature of the relationship. \cite{b7}\\
+A simple linear regression model has the form:
+\[Y=\beta_0+\beta_1X_1\]
+Where:\\
+	\indent\textbullet\ Y is the dependent variable (Target Variable).\\
+	\indent\textbullet\ \(X_1, X_2\) are the independent (explanatory) variables.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+	\indent\textbullet\ \(\beta_1\) is the regression coefficient for the independent variable.\\
+When there are multiple predictors, the equation is extended to accommodate them: Multiple Linear Regression. Instead of a line, we now have a linear model—the relationship between each coefficient and its variable (feature) is linear.
+\[Y=\beta_0+\beta_1 X_1+\beta_2 X_2+\cdots+\beta_k X_k+\varepsilon\]
+Where:\\
+	\indent\textbullet\ Y is the dependent variable (Target Variable).\\
+	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent (explanatory) variables.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
+	\indent\textbullet\ \(\varepsilon\) is the error term.
+ 
+\subsection{Arima}
+The Autoregressive Integrated Moving Average (ARIMA) \cite{b8} model utilizes time-series data and statistical analysis to interpret the data and forecast future values. ARIMA aims to understand data patterns by analyzing its past values and employs linear regression to make predictions.\\
+The ARIMA model is typically denoted with the parameters (p, d, q), which can be assigned different values to modify the model and apply it in different ways.\\
+Some of the limitations of the model are its dependency on data collection and the manual trial-and-error process required to determine parameter values that fit best. \\
+Meaning of each component in the Arima model:\\
+\indent \textbullet\ \textbf{AutoRegression (AR)}: refers to a model that shows a changing variable that regresses on its own lagged, or prior, values.\\
+The form of AR is: 
+\[Y_t=\alpha_0+\alpha_1 y_{t-1}+\alpha_2 y_{t-2}+\cdots+\alpha_p y_{t-p}+\varepsilon_t\]
+Where:\\
+	\indent\textbullet\ \(Y_t\) is the current value.\\
+        \indent\textbullet\ \(\alpha_0\) is the constant term.\\
+        \indent\textbullet\ p is the number of orders.\\
+        \indent\textbullet\ \(\alpha_1,..., \alpha_p\) are the auto-regression coefficient.\\
+	\indent\textbullet\ \(\varepsilon_t\) is the error term.\\
+
+\indent \textbullet\ \textbf{Integrated (I)}: represents the differencing of raw observations to allow the time series to become stationary.
+\indent \textbullet\ \textbf{Moving Average (MA)}: incorporates the dependency between an observation and a residual error from a moving average model applied to lagged observations.\\
+The form of MA is:
+\[Y_t=\beta_0+\beta_1 \varepsilon_{t-1}+\beta_2 \varepsilon_{t-2}+\cdots+\beta_q \varepsilon_{t-q}+\varepsilon_t\]
+Where:\\
+        \indent\textbullet\ \(Y_t\) is current observed value.\\
+	\indent\textbullet\ \(\varepsilon_{t-1}, \varepsilon_{t-2}, \ldots, \varepsilon_{t-q}\) are forecast error.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_q\) mean values of \(Y_t\) and moving average coefficients.\\
+	\indent\textbullet\ \(\varepsilon_{t}\) random forecasting error of the current period. The expected mean value is 0.\\
+        \indent\textbullet\ q is the number of past errors used in the moving average.
+
+\subsection{Holt-Winters}
+The Holt-Winters model is a time series forecasting method developed by Charles Holt and Peter Winters in 1960. It is a linear model used to forecast values in a time series with trends and seasonality that vary over time.\\
+Holt-Winters is a model of time series behavior. Forecasting always requires a model, and Holt-Winters is a way to model three aspects of the time series: a typical value (average), a slope (trend) over time, and a cyclical repeating pattern (seasonality). \cite{b9}\\
+The formula for the basic version of the Holt-Winters model (simple exponential smoothing) is:
+\begin{align*}
+F(t+1) &= \alpha Y(t) + (1-\alpha)(F(t) + T(t))
+\end{align*}
+Where:
+\begin{itemize}
+  \item \( Y(t) \) is the value at time \( t \).
+  \item \( F(t) \) is the forecasted value at time \( t \).
+  \item \( T(t) \) is the trend value at time \( t \).
+  \item \( \alpha \) is the model's smoothing constant ranging from 0 to 1, determining the importance of past values for the current forecast.
+\end{itemize}
+
+The formula for the enhanced version of the Holt-Winters model (Holt's linear exponential smoothing) is:
+\begin{align*}
+F(t+1) &= \alpha Y(t) + (1-\alpha)(F(t) + T(t)) \\
+T(t+1) &= \beta*(F(t+1)-F(t)) + (1-\beta)*T(t)
+\end{align*}
+Where:
+\begin{itemize}
+  \item \( \beta \) is the model's coefficient for trend, ranging from 0 to 1, determining the importance of trend changes for the forecast.
+\end{itemize}
+
+The formula for the enhanced version of the Holt-Winters model with seasonality adds a seasonal factor to the enhanced model's formula.
+\begin{align*}
+F(t+1) &= \alpha(Y(t) - S(t-m)) + (1-\alpha)(F(t) + T(t)) \\
+T(t+1) &= \beta*(F(t+1)-F(t)) + (1-\beta)*T(t) \\
+S(t+1) &= \gamma(Y(t) - F(t+1)) + (1-\gamma)*S(t-m+1)
+\end{align*}
+Where:
+\begin{itemize}
+  \item \( S(t-m) \) is the seasonal value at time \( t-m \), with \( m \) being the number of repetitions in the seasonal cycle.
+  \item \( \gamma \) is the model's coefficient for seasonality, ranging from 0 to 1, determining the importance of seasonal changes for the forecast.
+\end{itemize}
+
+\subsection{Support Vector Machine - SVM}
+Support Vector Regression (SVR) is a type of machine learning algorithm used for regression analysis. The goal of SVR is to find a function that approximates the relationship between the input variables and a continuous target variable, while minimizing the prediction error.\cite{b10} \\
+Support Vector Regression (SVR) uses the same principle as SVM, but for regression problems.\cite{b10}\\
+SVR can handle non-linear relationships between the input variables and the target variable by using a kernel function to map the data to a higher-dimensional space. This makes it a powerful tool for regression tasks where there may be complex relationships between the input variables and the target variable. \cite{b10}
+\begin{table}[H]
+\centering
+% \captionsetup{justification=centering}
+\caption{Kernels used in the Support Vector Machine}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Kernel} & \textbf{Equation} \\ \hline
+Linear & ${x^T z}$ \\ \hline
+Polynomial & $\left( r + \gamma {x^T z} \right)^d$ \\ \hline
+RBF & $\exp \left( -\gamma \frac{\|x - z\|_2^2}{2\sigma^2} \right), \gamma > 0$ \\ \hline
+Sigmoid & $\tanh \left( \gamma {x^T z} + r \right)$ \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Recurrent Neutral Networks (RNN)}
+Recurrent Neutral Networks (RNN) are a type of neutral network designed to process sequential data. They are analyze data with a temporal dimension, such as time series, speech, and text. RNN achieve this by using a hidden state that is passed from one timestep to the next. 
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.4]{bibliography/material/RNN.png}
+    \caption{Overview RNN}
+\end{figure}
+\\
+
+\subsection{Long short-term memory (LSTM)}
+the hello 
+\subsection{Gated Recurrent Unit (LSTM)}
+
+
+
+
+\section{Result}
+\subsection{Evaluation Methods}
+% \textbf{Mean Percentage Absolute Error} (MAPE): is the average percentage error in a set of predicted values.\\
+% \[MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 \]\\
+% \textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
+% \[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
+% \textbf{Mean Absolute Error} (MSLE):is the relative difference between the log-transformed actual and predicted values.\\
+% \[MSLE=\frac{1}{n}\sum_{i=1}^{n}(log(1+\hat{y_i})-log(log(1+y_i))^2\]
+% Where: \\
+% 	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
+% 	\indent\textbullet\ \(y_i\)  is the true value.\\
+% 	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
+\subsection{VHM Dataset} 
+% \begin{table}[H]
+%     \centering
+%     \begin{tabular}{|c|c|c|c|c|}
+%          \hline
+%          \multicolumn{5}{|c|}{\textbf{VCB Dataset's Evaluation}}\\
+%          \hline
+%          \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
+%          \hline
+%          \multirow{2}{*}{LN} & 7:3 & 10508.77 & 10.71 & 0.015 \\ & 8:2 & 11729.2 & 10.825 & 0.019 \\ & \textbf{9:1} & \textbf{7933.49} & \textbf{7.47} & \textbf{0.007}\\
+%          \hline
+%          \multirow{2}{*}{SVR} & 7:3&11864.3&7.52&0.021\\ & 8:2&8521.33&5.01&0.009 \\ & \textbf{9:1} & \textbf{7006.54} & \textbf{3.73} & \textbf{0.006}\\
+%          \hline
+%          \multirow{2}{*}{GRU} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
+%          \hline
+%          \multirow{2}{*}{ARIMA} & 7:3 &  8620.284 &  8.559 & 0.01 \\ & 8:2 &  11729.2 & 10.825 & 0.019 \\ & \textbf{9:1} & \textbf{7644.773}  & \textbf{7.287} & \textbf{0.007}\\
+%          \hline
+%          \multirow{2}{*}{SARIMA} & \textbf{7:3}	& \textbf{7971.644} & \textbf{7.755} & \textbf{0.009} \\ & 8:2 & 11711.484 & 10.809 & 0.019 \\ & 9:1 & 8629.708 & 8.253 & 0.009\\
+%          \hline
+%          \multirow{2}{*}{DLM} & 7:3 & 13156.831&13.336 & 0.021 \\ & \textbf{8:2} &	\textbf{7209.84} & \textbf{7.093} & \textbf{0.007} \\ & 9:1 &11945.338	&11.444&0.016\\
+%          \hline
+%          \multirow{2}{*}{SES} & 7:3 & 10949.0750 & 9.4738 & 0.0169 \\ & 8:2 & 11717.8586 &10.8142 & 0.0189 \\ & \textbf{9:1} &  	\textbf{6000.7953} &	\textbf{5.2412} & 	\textbf{0.004} \\
+%          \hline
+%          \multirow{2}{*}{BaggingGRU} & 7:3 & 941.7588 &  1.7384 &  0.0005 \\ & 8:2 & 939.7588 &  1.6546 &  0.0005 \\ & \textbf{9:1} & \textbf{936.8374} & \textbf{1.6273} & \textbf{0.0005}\\
+%          \hline
+%     \end{tabular}
+%     \caption{VCB Dataset's Evaluation}
+%     \label{vcbresult}
+% \end{table}
+
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+%     \caption{Linear model's result with 9:1 splitting proportion}
+%     \label{fig8}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/SVR_VCB91.png}
+%     \caption{SVR model's result with 9:1 splitting proportion}
+%     \label{fig9}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/GRU_VCB73.png}
+%     \caption{GRU model's result with 7:3 splitting proportion}
+%     \label{fig10}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/ARIMA_VCB91.png}
+%     \caption{ARIMA model's result with 9:1 splitting proportion}
+%     \label{fig11}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/SARIMA_VCB73.png}
+%     \caption{SARIMA model's result with 7:3 splitting proportion}
+%     \label{fig12}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/DLM_VCB82.png}
+%     \caption{DLM model's result with 8:2 splitting proportion}
+%     \label{fig13}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/ETS_VCB91.png}
+%     \caption{SES model's result with 9:1 splitting proportion}
+%     \label{fig14}
+%   \end{minipage}
+% \end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \begin{minipage}{0.8\linewidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{bibliography/baggingGRU_vcb.png}
+%     \caption{Bagging-GRU model's result with 8:2 splitting proportion}
+%     \label{bagginggru}
+%   \end{minipage}
+% \end{figure}
+\subsection{NVL dataset} 
+
+\subsection{NLG dataset} 
+
+\section{Conclusion}
+\subsection{Summary}
+
+\subsection{Future Considerations}
+% In our future research, it is crucial to prioritize further optimization of the previously mentioned models. This optimization effort should specifically focus on:\\
+% \indent\textbullet\ Enhancing the accuracy of the model. While the above algorithms have demonstrated promising results in predicting stock prices, there is a need to further improve the model's accuracy to ensure more precise forecasting outcomes.\\
+% \indent\textbullet\ Exploring alternative machine learning algorithms or ensemble techniques. Ensemble techniques, such as combining multiple models or using various ensemble learning methods, can also improve the robustness and accuracy of the forecasts.\\
+% \indent\textbullet\ Researching new forecasting models. The field of forecasting continuously evolves, with new algorithms and models being researched and developed. It is crucial to stay updated with these approaches and explore new forecasting models that offer improved accuracy and performance. \\
+% By continuously exploring and incorporating new features, data sources, and modeling techniques, we can strive for ongoing optimization of the forecasting models and enhance their ability to predict stock prices with greater precision and reliability.
+\section*{Acknowledgment}
+\addcontentsline{toc}{section}{Acknowledgment}
+First and foremost, we would like to express our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout the research process. Their mentorship and unwavering support have been instrumental in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail have significantly contributed to the success of this research.
+\\This research would not have been possible without the support and contributions of our mentors. We would like to extend our heartfelt thanks to everyone involved for their invaluable assistance, encouragement, and belief in our research. Thank you all for your invaluable assistance and encouragement.
+
+%% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+\begin{thebibliography}{00}
+\bibitem{b1} Ghosalkar, N. N., and Dhage, S. N. (2018). Real Estate Value Prediction Using Linear Regression. 2018 Fourth International Conference on Computing Communication Control and Automation (ICCUBEA). doi:10.1109/iccubea.2018.8697639.
+\bibitem{b2} Lin, Y., Guo, H., and Hu, J. (2013). An SVM-based approach for stock market trend prediction. The 2013 International Joint Conference on Neural Networks (IJCNN). doi:10.1109/ijcnn.2013.6706743.
+\bibitem{b3} Ariyo, A. A., Adewumi, A. O., and Ayo, C. K. (2014). Stock Price Prediction Using the ARIMA Model. 2014 UKSim-AMSS 16th International Conference on Computer Modelling and Simulation. doi:10.1109/uksim.2014.67.
+\bibitem{b4} Istiake Sunny, M. A., Maswood, M. M. S., and Alharbi, A. G. (2020). Deep Learning-Based Stock Price Prediction Using LSTM and Bi-Directional LSTM Model. 2020 2nd Novel Intelligent and Leading Emerging Sciences Conference (NILES). doi:10.1109/niles50944.2020.9257950.
+\bibitem{b5} Jaiswal, R., and Singh, B. (2022). A Hybrid Convolutional Recurrent (CNN-GRU) Model for Stock Price Prediction. IEEE, doi:10.1109/CSNT54456.2022.9787651.
+\bibitem{b6} C. Syavasya and A. L. Muddana, "Machine learning based Time series prediction using Holt-Winters Exponential Smoothing with Multiplicative Seasonality," IEEE, doi:10.1109/ICEECCOT52851.2021.9708006.
+\bibitem{b7} P. Bruce, A. Bruce, and P. Gedeck, Practical Statistics for Data Scientists: 50+ Essential Concepts Using r and Python. Sebastopol, CA: O’Reilly Media, 2020. 
+\bibitem{b8} “Autoregressive Integrated moving average (ARIMA),” Corporate Finance Institute, https://corporatefinanceinstitute.com/resources/data-science/autoregressive-integrated-moving-average-arima/ (accessed May 5, 2024). 
+\bibitem{b9} “Autoregressive Integrated moving average (ARIMA),” Corporate Finance Institute, https://corporatefinanceinstitute.com/resources/data-science/autoregressive-integrated-moving-average-arima/ (accessed May 5, 2024).
+\bibitem{b10} A. Sethi, “Support vector regression tutorial for machine learning,” Analytics Vidhya, https://www.analyticsvidhya.com/blog/2020/03/support-vector-regression-tutorial-for-machine-learning/ (accessed May 15, 2024). 
+
+\end{thebibliography}
+%%%%%%%%%%%%%%%
+
+\EOD
+
+\end{document}
