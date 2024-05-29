@@ -257,7 +257,18 @@
 	RNNs possess a memory that retains all information related to the calculations. They use the same parameters for each input because they achieve consistent outcomes by performing the same operations on all inputs or hidden layers \cite{b12}.
 	
 	\subsection{Long short-term memory (LSTM)}
-	
+	Long Short-Term Memory (LSTM) is a type of recurrent neural network (RNN) architecture in deep learning. Unlike standard feedforward neural networks, LSTMs incorporate feedback connections, enabling them to utilize temporal dependencies in data sequences.\\ 
+	They are designed to handle the problem of diminishing or exploding gradients that can arise when training traditional RNNs on sequential data. This makes LSTMs particularly well-suited for tasks involving sequential data, such as natural language processing, speech recognition, and time series forecasting \cite{b13}.
+	\begin{figure}[H] % Use [H] to force the figure to stay here
+		\centering
+		\includegraphics[scale=0.4]{bibliography/material/lstm.png}
+		\caption{Architecture and Working of LSTM}
+	\end{figure}
+	\noindent \textbf{Forget Gate}: $f_t = (W_f[h_{t-1}, x_t] + b_f$ \\
+	\textbf{Input Gate}: $i_t = (W_i[h_{t-1}, x_t] + b_i$ \\
+	\textbf{Output Gate}: $o_t = (W_o[h_{t-1}, x_t] + b_o$\\
+	\textbf{Temporary cell state}: \[\tilde{C}_t = \tanh(W_c[h_{t-1}, x_t] + b_c\]
+	\textbf{Current cell state}: $C_t = f_t * C_{t-1} + i_t * \tilde{C}_t$ \cite{b14}
 	
 	\subsection{Gated Recurrent Unit (GRU)}
 	The Gated Recurrent Unit (GRU) is a specialized type of recurrent neural network (RNN) designed to address the limitations of traditional RNNs, such as the vanishing gradient problem. GRUs have proven effective in a variety of applications, including natural language processing, speech recognition, and time series prediction \cite{b15}.
@@ -423,11 +434,11 @@
 		\bibitem{b10} A. Sethi, “Support vector regression tutorial for machine learning,” Analytics Vidhya, https://www.analyticsvidhya.com/blog/2020/03/support-vector-regression-tutorial-for-machine-learning/ (accessed May 15, 2024). 
 		\bibitem{b11} D. Kalita, “A brief overview of recurrent neural networks (RNN),” Analytics Vidhya, https://www.analyticsvidhya.com/blog/2022/03/a-brief-overview-of-recurrent-neural-networks-rnn/ (accessed May 29, 2024). 
 		\bibitem{b12} J. Nabi, “Recurrent neural networks (rnns),” Medium, https://towardsdatascience.com/recurrent-neural-networks-rnns-3f06d7653a85 (accessed May 29, 2024). 
-		
-		
+		\bibitem{b13} R. Hamad, “What is LSTM? Introduction to Long Short-Term Memory,” Medium, Dec. 11, 2023. https://medium.com/@rebeen.jaff/what-is-lstm-introduction-to-long-short-term-memory-66bd3855b9ce (accessed May 29, 2024).
+		\bibitem{b14} A. Chugh, “Deep Learning | Introduction to Long Short Term Memory,” GeeksforGeeks, Jan. 16, 2019. https://www.geeksforgeeks.org/deep-learning-introduction-to-long-short-term-memory/ (accessed May 29, 2024).
 		\bibitem{b15} “Educative Answers - Trusted Answers to Developer Questions,” Educative. https://www.educative.io/answers/what-is-a-gated-recurrent-unit-gru (accessed May 29, 2024).
 		\bibitem{b16} Anishnama, “Understanding Gated Recurrent Unit (GRU) in Deep Learning,” Medium, May 04, 2023. https://medium.com/@anishnama20/understanding-gated-recurrent-unit-gru-in-deep-learning-2e54923f3e2 (accessed May 29, 2024).
-		\bibitem{b17} “What is a multilayer perceptron (MLP) neural network?,” https://www.shiksha.com/online-courses/articles/understanding-multilayer-perceptron-mlp-neural-networks/ (accessed May 29, 2024).
+		\bibitem{b17} “What is a multilayer perceptron (MLP) neural network?” https://www.shiksha.com/online-courses/articles/understanding-multilayer-perceptron-mlp-neural-networks/ (accessed May 29, 2024).
 		‌
 		
 		
