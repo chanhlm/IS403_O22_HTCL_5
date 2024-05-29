@@ -28,6 +28,7 @@ No. | Student ID | Full Name
     * Tran Thi Kim Anh: Holt-Winters, Linear Regression
     * Le Minh Chanh: ARIMA
 4. Week 4 - Machine Learning Model: 
-    * Le Minh Chanh: Support Vector Machine (kernel khác rbf)
+    * Le Minh Chanh: Support Vector Machine (kernel <> rbf)
 5. Week 5 - Deep Learning Model: 
-    * 
+    * Tran Thi Kim Anh: LSTM
+    * Phi Quang Thanh: GRU, RNN, MLP
