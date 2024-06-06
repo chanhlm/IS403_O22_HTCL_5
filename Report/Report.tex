@@ -55,7 +55,7 @@
 	Syavasya and Muddana (2021) \cite{b6} developed a machine learning-based time series prediction method using Holt-Winters Exponential Smoothing with Multiplicative Seasonality. Their research aimed to improve forecasting accuracy by incorporating advanced machine learning techniques into traditional time series analysis. 
 	\section{Materials}
 	\subsection{Dataset}
-	The reference datasets used are sourced as follows: The historical stock price data of Vinhomes (VHM), No Va Land Investment Group Corp (NVL) and Nam Long Investment Corp (NLG). The datasets are obtained from the investing.com website, and the data is available within the time range from March 1, 2019, to March 1, 2024. Because the project goal is to predict closing prices, we'll only analyze data from the "Close" column (in VND). The dataset contains the following columns:
+	The reference datasets used are sourced as follows: The historical stock price data of Vinhomes (VHM), No Va Land Investment Group Corp (NVL) and Nam Long Investment Corp (NLG). The datasets are obtained from the investing.com website, and the data is available within the time range from March 1, 2019, to June 1, 2024. Because the project goal is to predict closing prices, we'll only analyze data from the "Close" column (in VND). The dataset contains the following columns:
 	\begin{itemize}
 		\item Date: Represents the date when the financial data was recorded.
 		\item Price (also known as the Close Price): Refers to the price of the stock at the end of
@@ -165,7 +165,7 @@
 	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
 	\indent\textbullet\ \(\varepsilon\) is the error term.
 	
-	\subsection{Arima}
+	\subsection{ARIMA}
 	The Autoregressive Integrated Moving Average (ARIMA) \cite{b8} model utilizes time-series data and statistical analysis to interpret the data and forecast future values. ARIMA aims to understand data patterns by analyzing its past values and employs linear regression to make predictions.\\
 	The ARIMA model is typically denoted with the parameters (p, d, q), which can be assigned different values to modify the model and apply it in different ways.\\
 	Some of the limitations of the model are its dependency on data collection and the manual trial-and-error process required to determine parameter values that fit best. \\
@@ -290,121 +290,349 @@
 	
 	\section{Result}
 	\subsection{Evaluation Methods}
-	% \textbf{Mean Percentage Absolute Error} (MAPE): is the average percentage error in a set of predicted values.\\
-	% \[MAPE=\frac{100\%}{n}  \sum_{i=1}^{n} |y_i-\hat{y_i} |  = 1 \]\\
-	% \textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
-	% \[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
-	% \textbf{Mean Absolute Error} (MSLE):is the relative difference between the log-transformed actual and predicted values.\\
-	% \[MSLE=\frac{1}{n}\sum_{i=1}^{n}(log(1+\hat{y_i})-log(log(1+y_i))^2\]
-	% Where: \\
-	% 	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
-	% 	\indent\textbullet\ \(y_i\)  is the true value.\\
-	% 	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
-	\subsection{VHM Dataset} 
-	% \begin{table}[H]
-		%     \centering
-		%     \begin{tabular}{|c|c|c|c|c|}
-			%          \hline
-			%          \multicolumn{5}{|c|}{\textbf{VCB Dataset's Evaluation}}\\
-			%          \hline
-			%          \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
-			%          \hline
-			%          \multirow{2}{*}{LN} & 7:3 & 10508.77 & 10.71 & 0.015 \\ & 8:2 & 11729.2 & 10.825 & 0.019 \\ & \textbf{9:1} & \textbf{7933.49} & \textbf{7.47} & \textbf{0.007}\\
-			%          \hline
-			%          \multirow{2}{*}{SVR} & 7:3&11864.3&7.52&0.021\\ & 8:2&8521.33&5.01&0.009 \\ & \textbf{9:1} & \textbf{7006.54} & \textbf{3.73} & \textbf{0.006}\\
-			%          \hline
-			%          \multirow{2}{*}{GRU} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
-			%          \hline
-			%          \multirow{2}{*}{ARIMA} & 7:3 &  8620.284 &  8.559 & 0.01 \\ & 8:2 &  11729.2 & 10.825 & 0.019 \\ & \textbf{9:1} & \textbf{7644.773}  & \textbf{7.287} & \textbf{0.007}\\
-			%          \hline
-			%          \multirow{2}{*}{SARIMA} & \textbf{7:3}	& \textbf{7971.644} & \textbf{7.755} & \textbf{0.009} \\ & 8:2 & 11711.484 & 10.809 & 0.019 \\ & 9:1 & 8629.708 & 8.253 & 0.009\\
-			%          \hline
-			%          \multirow{2}{*}{DLM} & 7:3 & 13156.831&13.336 & 0.021 \\ & \textbf{8:2} &	\textbf{7209.84} & \textbf{7.093} & \textbf{0.007} \\ & 9:1 &11945.338	&11.444&0.016\\
-			%          \hline
-			%          \multirow{2}{*}{SES} & 7:3 & 10949.0750 & 9.4738 & 0.0169 \\ & 8:2 & 11717.8586 &10.8142 & 0.0189 \\ & \textbf{9:1} &  	\textbf{6000.7953} &	\textbf{5.2412} & 	\textbf{0.004} \\
-			%          \hline
-			%          \multirow{2}{*}{BaggingGRU} & 7:3 & 941.7588 &  1.7384 &  0.0005 \\ & 8:2 & 939.7588 &  1.6546 &  0.0005 \\ & \textbf{9:1} & \textbf{936.8374} & \textbf{1.6273} & \textbf{0.0005}\\
-			%          \hline
-			%     \end{tabular}
-		%     \caption{VCB Dataset's Evaluation}
-		%     \label{vcbresult}
-		% \end{table}
+	\textbf{Mean Absolute Percentage Error} (MAPE): is the average percentage error in a set of predicted values. \cite{b18}
+	\[MAPE = \frac{1}{n} \sum_{i=1}^n \left| \frac{y_i - \hat{y_i}}{y_i} \right| \times 100\%\]
+	\textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values. \cite{b19}
+	\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]
+	\textbf{Mean Absolute Error} (MAE):is a measure of the average size of the mistakes in a collection of predictions, without taking their direction into account. \cite{b20} \[MAE=\frac{\sum_{i=1}^{n} (y_i - \hat{y_i})}{n}\]
 	
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			%     \caption{Linear model's result with 9:1 splitting proportion}
-			%     \label{fig8}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/SVR_VCB91.png}
-			%     \caption{SVR model's result with 9:1 splitting proportion}
-			%     \label{fig9}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/GRU_VCB73.png}
-			%     \caption{GRU model's result with 7:3 splitting proportion}
-			%     \label{fig10}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/ARIMA_VCB91.png}
-			%     \caption{ARIMA model's result with 9:1 splitting proportion}
-			%     \label{fig11}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/SARIMA_VCB73.png}
-			%     \caption{SARIMA model's result with 7:3 splitting proportion}
-			%     \label{fig12}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/DLM_VCB82.png}
-			%     \caption{DLM model's result with 8:2 splitting proportion}
-			%     \label{fig13}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/ETS_VCB91.png}
-			%     \caption{SES model's result with 9:1 splitting proportion}
-			%     \label{fig14}
-			%   \end{minipage}
-		% \end{figure}
-	% \begin{figure}[H]
-		%   \centering
-		%   \begin{minipage}{0.8\linewidth}
-			%     \centering
-			%     \includegraphics[width=\linewidth]{bibliography/baggingGRU_vcb.png}
-			%     \caption{Bagging-GRU model's result with 8:2 splitting proportion}
-			%     \label{bagginggru}
-			%   \end{minipage}
-		% \end{figure}
+	Where: \\
+	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
+	\indent\textbullet\ \(y_i\)  is the true value.\\
+	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
+	
+	\subsection{VHM Dataset} 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\multicolumn{5}{|c|}{\textbf{VHM Dataset's Evaluation}}\\
+			\hline
+			\centering Model & Training:Testing & RMSE & MAPE (\%) & MAE\\
+			\hline
+			\multirow{2}{*}
+			{LN} & 7:3 & 25814.26 & 0.55 & 24944.85 \\ & \textbf{8:2} & \textbf{14900.19} & \textbf{0.31} & \textbf{13449.04} \\ & 9:1 & 14328.43 & 0.34 & 14233.33\\
+			\hline
+			\multirow{2}{*}
+			{ARIMA} & 7:3 & 6636.32 & 10.36 & 5212.09 \\ & 8:2 & 8167.35 & 17.00 & 7572.52 \\ & \textbf{9:1} & \textbf{1577.74} & \textbf{3.14} & \textbf{1323.28}\\
+			\hline
+			\multirow{2}{*}
+			{Holt-Winters} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{} \\	
+			\hline
+			\multirow{2}{*}
+			{SVM} & 7:3 & 3735.48 & 7.52 & 3295.45  \\ & \textbf{8:2} & \textbf{3282.12} & \textbf{6.58} & \textbf{2808.12} \\ & 9:1 & 3547.91 & 8.41 & 3488.26\\
+			\hline
+			\multirow{2}{*}
+			{RNN} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{} \\
+			\hline
+			\multirow{2}{*}
+			{LSTM} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{GRU} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+		\end{tabular}
+		\caption{VHM Dataset's Evaluation}
+		\label{vhmresult}
+	\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_LN_82.png}
+			\caption{Linear Regression Model's Result with ratio 8:2}
+			\label{fig1.1}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_ARIMA_91.png}
+			\caption{ARIMA Model's Result with ratio 9:1}
+			\label{fig1.2}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{Holt-Winters Model's Result with ratio ...}
+			\label{fig1.3}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_SVM_82.png}
+			\caption{SVM Model's Result with ratio 8:2}
+			\label{fig1.4}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{RNN Model's Result with ratio ...}
+			\label{fig1.5}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{LSTM Model's Result with ratio ...}
+			\label{fig1.6}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{GRU Model's Result with ratio ...}
+			\label{fig1.7}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{MLP Model's Result with ratio ...}
+			\label{fig1.8}
+		\end{minipage}
+	\end{figure}
+	
 	\subsection{NVL dataset} 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\multicolumn{5}{|c|}{\textbf{NVL Dataset's Evaluation}}\\
+			\hline
+			\centering Model & Training:Testing & RMSE & MAPE (\%) & MAE\\
+			\hline
+			\multirow{2}{*}
+			{LN} & 7:3 & 87100.36 & 5.57 & 86164.51 \\ & 8:2 & 51666.93 & 3.23 & 51584.50 \\ & \textbf{9:1} & \textbf{31168.01} & \textbf{1.91} & \textbf{31140.49}\\
+			\hline
+			\multirow{2}{*}
+			{ARIMA} & 7:3 & 55833.75 & 360.76 & 55322.63 \\ & \textbf{8:2} & \textbf{2639.90} & \textbf{11.59} & \textbf{2028.89} \\ & 9:1 & 4400.47 & 22.33 & 3480.32\\
+			\hline
+			\multirow{2}{*}
+			{Holt-Winters} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\	
+			\hline
+			\multirow{2}{*}
+			{SVM} & 7:3 & 10247.84 & 66.62 & 9972.52 \\ & 8:2 & 9441.46 & 59.33 & 9333.82 \\ & \textbf{9:1} & \textbf{8560.97} & \textbf{52.41} & \textbf{8517.07}\\
+			\hline
+			\multirow{2}{*}
+			{RNN} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{LSTM} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{GRU} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+		\end{tabular}
+		\caption{NVL Dataset's Evaluation}
+		\label{nvlresult}
+	\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_LN_91.png}
+			\caption{Linear Regression Model's Result with ratio 9:1}
+			\label{fig2.1}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_ARIMA_82.png}
+			\caption{ARIMA Model's Result with ratio 8:2}
+			\label{fig2.2}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{Holt-Winters Model's Result with ratio ...}
+			\label{fig2.3}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_SVM_91.png}
+			\caption{SVM Model's Result with ratio 9:1}
+			\label{fig2.4}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{RNN Model's Result with ratio ...}
+			\label{fig2.5}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{LSTM Model's Result with ratio ...}
+			\label{fig2.6}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{GRU Model's Result with ratio ...}
+			\label{fig2.7}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{MLP Model's Result with ratio ...}
+			\label{fig2.8}
+		\end{minipage}
+	\end{figure}
 	
 	\subsection{NLG dataset} 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\multicolumn{5}{|c|}{\textbf{NLG Dataset's Evaluation}}\\
+			\hline
+			\centering Model & Training:Testing & RMSE & MAPE (\%) & MAE\\
+			\hline
+			\multirow{2}{*}
+			{LN} & 7:3 & 20076.15 & 0.62 & 19835.05 \\ & 8:2 & 7418.30 & 0.19 & 6940.70 \\ & \textbf{9:1} & \textbf{3411.84} & \textbf{0.07} & \textbf{2910.82}\\
+			\hline
+			\multirow{2}{*}
+			{ARIMA} & 7:3 & 12685.64 & 31.31 & 11342.47 \\ & 8:2 & 5241.30 & 10.75 & 4256.91 \\ & \textbf{9:1} & \textbf{4232.40} & \textbf{7.68} & \textbf{3230.54}\\
+			\hline
+			\multirow{2}{*}
+			{Holt-Winters} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\	
+			\hline
+			\multirow{2}{*}
+			{SVM} & 7:3 & 2241.50 & 6.15 & 2102.78 \\ & 8:2 & 2148.39 & 5.58 & 2056.39 \\ & \textbf{9:1} & \textbf{1361.15} & \textbf{3.15} & \textbf{1224.44}\\
+			\hline
+			\multirow{2}{*}
+			{RNN} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{LSTM} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{GRU} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+			\multirow{2}{*}
+			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			\hline
+		\end{tabular}
+		\caption{NLG Dataset's Evaluation}
+		\label{nlgresult}
+	\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_LN_91.png}
+			\caption{Linear Regression Model's Result with ratio 9:1}
+			\label{fig3.1}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_ARIMA_91.png}
+			\caption{ARIMA Model's Result with ratio 9:1}
+			\label{fig3.2}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{Holt-Winters Model's Result with ratio ...}
+			\label{fig3.3}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_SVM_91.png}
+			\caption{SVM Model's Result with ratio 9:1}
+			\label{fig3.4}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{RNN Model's Result with ratio ...}
+			\label{fig3.5}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{LSTM Model's Result with ratio ...}
+			\label{fig3.6}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{GRU Model's Result with ratio ...}
+			\label{fig3.7}
+		\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.9\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
+			\caption{MLP Model's Result with ratio ...}
+			\label{fig3.8}
+		\end{minipage}
+	\end{figure}
 	
 	\section{Conclusion}
 	\subsection{Summary}
@@ -439,8 +667,9 @@
 		\bibitem{b15} “Educative Answers - Trusted Answers to Developer Questions,” Educative. https://www.educative.io/answers/what-is-a-gated-recurrent-unit-gru (accessed May 29, 2024).
 		\bibitem{b16} Anishnama, “Understanding Gated Recurrent Unit (GRU) in Deep Learning,” Medium, May 04, 2023. https://medium.com/@anishnama20/understanding-gated-recurrent-unit-gru-in-deep-learning-2e54923f3e2 (accessed May 29, 2024).
 		\bibitem{b17} “What is a multilayer perceptron (MLP) neural network?” https://www.shiksha.com/online-courses/articles/understanding-multilayer-perceptron-mlp-neural-networks/ (accessed May 29, 2024).
-		‌
-		
+		‌\bibitem{b18} “IPM Insights metrics include MAPE (Mean Absolute Percentage Error),” Oracle Help Center, May 01, 2024. https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/insights\_metrics\_MAPE.html. 
+		\bibitem{b19} “RMSE (Root Mean squared Error),” Oracle Help Center, May 01, 2024. https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusu/insights\_metrics\_RMSE.html
+		\bibitem{b20} “What is Mean Absolute Error? Formula \& Significance,” Deepchecks, May 27, 2024. https://deepchecks.com/glossary/mean-absolute-error/
 		
 		
 	\end{thebibliography}
