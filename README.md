@@ -32,3 +32,5 @@ No. | Student ID | Full Name
 5. Week 5 - Deep Learning Model: 
     * Tran Thi Kim Anh: LSTM
     * Phi Quang Thanh: GRU, RNN, MLP
+6. Week 6 - Evaluation and predict 30 days: All members with their models
+7. Week 7 - Evaluation and predct 60, 90 days: All members with their models
