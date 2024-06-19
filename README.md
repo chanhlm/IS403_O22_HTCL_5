@@ -34,3 +34,4 @@ No. | Student ID | Full Name
     * Phi Quang Thanh: GRU, RNN, MLP
 6. Week 6 - Evaluation and predict 30 days: All members with their models
 7. Week 7 - Evaluation and predct 60, 90 days: All members with their models
+8. Week 8 - Final Report: All members
