@@ -9,7 +9,14 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{float}
-% \usepackage{caption}
+\usepackage{caption}
+
+\captionsetup{
+	font=small, % Thay đổi cỡ chữ cho caption (có thể là footnotesize, small, large, ...)
+	labelfont={bf,color=ojiescolor}, % Định dạng phông chữ cho nhãn (label) của caption (in đậm và màu)
+	justification=centering, % Căn giữa caption
+	singlelinecheck=false % Đảm bảo căn giữa ngay cả khi caption chỉ có một dòng
+}
 
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -30,11 +37,11 @@
 	{Author \headeretal: Tran Thi Kim Anh, Phi Quang Thanh, Le Minh Chanh}
 	
 	\begin{abstract}
-		The stock market serves as a cornerstone of Vietnam's finance, providing a platform for investors to trade securities such as stocks, bonds, and derivatives. Developing predictive models for stock prices will aid investors in making decisions more efficiently. In this research, we utilize statistical and machine learning algorithms, as well as deep learning such as Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent neural network (RNN), Holt-Winters, TimesNet to forecast the stock prices of three prominent real estate companies: Vinhomes (JSC), Novaland (NVL), and Nam Long Corp (NLG). By leveraging a diverse array of methodologies, we aim to gain insights into the behavior of these stocks and enhance investors' ability to make well-informed decisions in the dynamic real estate market.
+		The stock market serves as a cornerstone of Vietnam's finance, providing a platform for investors to trade securities such as stocks, bonds, and derivatives. Developing predictive models for stock prices will aid investors in making decisions more efficiently. In this research, we utilize statistical and machine learning algorithms, as well as deep learning such as Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent Neural Network (RNN), Holt-Winters, Multi-layer Perceptron (MLP) to forecast the stock prices of three prominent real estate companies: Vinhomes JSC (VHM), No Va Land Investment Group Corp (NVL), and Nam Long Investment Corp (NLG). By leveraging a diverse array of methodologies, we aim to gain insights into the behavior of these stocks and enhance investors' ability to make well-informed decisions in the dynamic real estate market.
 	\end{abstract}
 	
 	\begin{keywords}
-		\textbf{Keywords} - Linear Regression, SVM, ARIMA, LSTM, GRU, RNN, Holt-Winters, TimesNet.
+		\textbf{Keywords} - Linear Regression, SVM, ARIMA, LSTM, GRU, RNN, Holt-Winters, MLP.
 	\end{keywords}
 	
 	\titlepgskip=-15pt
@@ -43,7 +50,7 @@
 	\section{Introduction}
 	Vietnam's stock market holds a pivotal position in the country's financial landscape, serving as a key platform for investors to engage in the trading of various securities, including stocks, bonds, and derivatives. With its dynamic nature and significant impact on the economy, the stock market plays a crucial role in facilitating capital mobilization, fostering business growth, and contributing to overall economic development.\\
 	In recent years, the adoption of predictive modeling techniques has gained traction within the Vietnamese stock market ecosystem. These predictive models, leveraging statistical and machine learning algorithms, enable investors to forecast stock prices with greater accuracy and efficiency. By harnessing the power of data-driven insights, investors can make more informed decisions, mitigate risks, and seize lucrative investment opportunities.\\
-	In this research, we focus on predicting the stock prices of three prominent companies in the Vietnamese real estate sector: Vinhomes, Novaland, and Nam Long Corp. Through the application of various predictive algorithms, including but not limited to Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent neural network (RNN), Holt-winters, and TimesNet, we aim to provide valuable insights into the future behavior of these stocks. By examining historical data and market trends, we seek to enhance investors' understanding of the dynamics influencing stock prices in the Vietnamese real estate market.\\
+	In this research, we focus on predicting the stock prices of three prominent companies in the Vietnamese real estate sector: Vinhomes, Novaland, and Nam Long Corp. Through the application of various predictive algorithms, including but not limited to Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent neural network (RNN), Holt-Winters, and Multi-layer Perceptron (MLP), we aim to provide valuable insights into the future behavior of these stocks. By examining historical data and market trends, we seek to enhance investors' understanding of the dynamics influencing stock prices in the Vietnamese real estate market.\\
 	By leveraging these predictive models, investors can gain a competitive edge in the stock market, optimize their investment strategies, and navigate the complexities of the Vietnamese real estate sector with confidence and precision. Through this research endeavor, we strive to contribute to the advancement of predictive modeling techniques within Vietnam's stock market, ultimately empowering investors to make informed decisions and achieve their financial objectives. 
 	
 	\section{Related Works}
@@ -77,13 +84,13 @@
 		\begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|}
 			\hline
 			\rowcolor{red!20} & VHM & NVL & NLG \\ \hline
-			Count & 1252 & 1252 & 1252 \\ \hline
-			Mean & 62,066 & 43,756 & 31,100\\ \hline
-			Std & 11,878 & 25,614 & 10,816\\ \hline
+			Count & 1313 & 1313 & 1313 \\ \hline
+			Mean & 61,124 & 42,460 & 31,578\\ \hline
+			Std & 12,362 & 25,694 & 10,822\\ \hline
 			Min & 38,450 & 10,250 & 14,414\\ \hline
-			25\% & 53,900 & 23,350 & 21,509\\ \hline
-			50\% & 61,768 & 34,213 & 30,132\\ \hline
-			75\% & 71,569 & 76,000 & 37,200\\ \hline
+			25\% & 51,500 & 18,200 & 21,614\\ \hline
+			50\% & 61,100 & 33,656 & 30,601\\ \hline
+			75\% & 70,676 & 75,300 & 38,013\\ \hline
 			Max & 88,722 & 92,366 & 63,723\\ \hline
 		\end{tabular}
 	\end{table}
@@ -93,14 +100,14 @@
 			\centering
 			\includegraphics[width=1\textwidth]{bibliography/material/VHMboxplot.png}
 			\caption{VHM stock price's boxplot}
-			\label{fig:1}
+			\label{fig:0.1}
 		\end{minipage}
 		\hfill
 		\begin{minipage}{0.23\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{bibliography/material/VHMhist.png}
 			\caption{VHM stock price's histogram}
-			\label{fig:2}
+			\label{fig:0.2}
 		\end{minipage}
 		
 	\end{figure}
@@ -110,14 +117,14 @@
 			\centering
 			\includegraphics[width=1\textwidth]{bibliography/material/NVLboxplot.png}
 			\caption{NVL stock price's boxplot}
-			\label{fig:1}
+			\label{fig:0.3}
 		\end{minipage}
 		\hfill
 		\begin{minipage}{0.23\textwidth}
 			\centering
 			\includegraphics[width=1\textwidth]{bibliography/material/NVLhist.png}
 			\caption{NVL stock price's histogram}
-			\label{fig:2}
+			\label{fig:0.4}
 		\end{minipage}
 	\end{figure}
 	\begin{figure}[H]
@@ -136,15 +143,17 @@
 			\label{fig:2}
 		\end{minipage}
 	\end{figure}
+	\newpage
 	Based on the data:
 	\begin{itemize}
-		\item VHM has the highest average at 62,066, followed by NVL at 43,756, and NLG at
-		31,100.
-		\item NVL has the highest variability with a standard deviation of 25,614.
+		\item VHM has the highest average at 61,124, followed by NVL at 42,460, and NLG at
+		31,578.
+		\item NVL has the highest variability with a standard deviation of 25,694.
 		\item NVL also has the widest range of values, from 10,250 to 92,366.
 		\item NLG has the lowest average and variability.
 	\end{itemize}
 	Overall, NVL stands out for its high variability and wide range of values, while VHM consistently maintains higher averages. NLG consistently has lower values compared to the other two groups.
+	
 	
 	\section{Methodology}
 	\subsection{Linear Regression}
@@ -282,8 +291,13 @@
 	
 	\subsection{Multilayer Perceptron (MLP)}
 	
-	A MultiLayer Perceptron (MLP) Neural Network is a type of feedforward artificial neural network with multiple layers, including an input layer, one or more hidden layers, and an output layer. Each layer is fully connected to the next, and it utilizes the BackPropagation algorithm for training. \\
-	The MLP Neural Network comprises three main layers: the input layer, hidden layer(s), and output layer. The input layer receives input from the dataset, the hidden layer processes computations using activation functions, and the output layer provides the estimated output. \\
+	A MultiLayer Perceptron (MLP) Neural Network is a type of feedforward artificial neural network with multiple layers, including an input layer, one or more hidden layers, and an output layer.\\
+	\begin{figure}[H] % Use [H] to force the figure to stay here
+		\centering
+		\includegraphics[scale=0.4]{bibliography/material/mlp.jpg}
+		\caption{Architecture and Working of MLP}
+	\end{figure}
+	The input layer receives input from the dataset, the hidden layer processes computations using activation functions, and the output layer provides the estimated output. Each layer is fully connected to the next, and it utilizes the BackPropagation algorithm for training.\\
 	The input nodes pass data to the hidden layer, where computations are performed using weighted edges and activation functions. The output is then generated and compared with the actual output, and the BackPropagation algorithm is used to adjust weights and reduce error. \\
 	The MLP Neural Network is widely used in various applications such as image classification and regression prediction. Its effectiveness depends on the problem type and dataset characteristics. \cite{b17} \\
 	
@@ -304,6 +318,7 @@
 	\subsection{VHM Dataset} 
 	\begin{table}[H]
 		\centering
+		\caption{VHM Dataset's Evaluation}
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
 			\multicolumn{5}{|c|}{\textbf{VHM Dataset's Evaluation}}\\
@@ -326,16 +341,15 @@
 			{RNN} & 7:3 & 1407.93 & 2.41 & 1115.66 \\ & 8:2 & 855.11 & 1.46 & 617.93 \\ & \textbf{9:1} & \textbf{671.09} & \textbf{1.20} & \textbf{491.23} \\
 			\hline
 			\multirow{2}{*}
-			{LSTM} & 7:3 & 1942.57 & 3.59 & 1610.65 \\ & 8:2 & 1584.43 & 3.19 & 1327.38 \\ & \textbf{9:1} & \textbf{620.8} & \textbf{1.11} & \textbf{453.75}\\
+			{LSTM} & 7:3 & 2102.25 & 3.93 & 1750.52 \\ & \textbf{8:2} & \textbf{1438.93} & \textbf{2.81} & \textbf{1171.87} \\ & 9:1 & 1293.32 & 2.91 & 1184.94\\
 			\hline
 			\multirow{2}{*}
 			{GRU} & 7:3 & 1066.36 & 1.61 & 768.15 \\ & 8:2 & 852.96 & 1.40 & 591.53 \\ & \textbf{9:1} & \textbf{583.23} & \textbf{0.94} & \textbf{386.74}\\
 			\hline
 			\multirow{2}{*}
-			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			{MLP} & 7:3 & 2183.69 & 3.48 & 1571.34 \\ & 8:2 & 2893.76 & 4.38 & 1801.37 \\ & \textbf{9:1} & \textbf{1076.00} & \textbf{2.17} & \textbf{891.57}\\
 			\hline
 		\end{tabular}
-		\caption{VHM Dataset's Evaluation}
 		\label{vhmresult}
 	\end{table}
 	
@@ -361,8 +375,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{Holt-Winters Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_HW_82.png}
+			\caption{Holt-Winters Model's Result with ratio 8:2}
 			\label{fig1.3}
 		\end{minipage}
 	\end{figure}
@@ -370,8 +384,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/result/VHM_SVM_82.png}
-			\caption{SVM Model's Result with ratio 8:2}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_SVM_73.png}
+			\caption{SVM Model's Result with ratio 7:3}
 			\label{fig1.4}
 		\end{minipage}
 	\end{figure}
@@ -379,8 +393,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{RNN Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_RNN_91.png}
+			\caption{RNN Model's Result with ratio 9:1}
 			\label{fig1.5}
 		\end{minipage}
 	\end{figure}
@@ -388,8 +402,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{LSTM Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_LSTM_82.png}
+			\caption{LSTM Model's Result with ratio 8:2}
 			\label{fig1.6}
 		\end{minipage}
 	\end{figure}
@@ -397,8 +411,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{GRU Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_GRU_91.png}
+			\caption{GRU Model's Result with ratio 9:1}
 			\label{fig1.7}
 		\end{minipage}
 	\end{figure}
@@ -406,14 +420,15 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{MLP Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/VHM_MLP_91.png}
+			\caption{MLP Model's Result with ratio 9:1}
 			\label{fig1.8}
 		\end{minipage}
 	\end{figure}
 	
 	\subsection{NVL dataset} 
 	\begin{table}[H]
+		\caption{NVL Dataset's Evaluation}
 		\centering
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
@@ -437,16 +452,15 @@
 			{RNN} & 7:3 & 491.23 & 4.38 & 694.62 \\ & 8:2 & 761.62 & 3.74 & 594.50 \\ & \textbf{9:1} & \textbf{467.80} & \textbf{2.15} & \textbf{320.25}\\
 			\hline
 			\multirow{2}{*}
-			{LSTM} & 7:3 & 2105.96 & 11.87 & 1883.52 \\ & \textbf{8:2} & \textbf{757.53} & \textbf{3.53} & \textbf{551.76} \\ & 9:1 & 976.78 & 4.68 & 685.85\\
+			{LSTM} & 7:3 & 1993.48 & 11.17 & 1783.12 \\ & \textbf{8:2} & \textbf{793.88} & \textbf{3.72} & \textbf{581.56} \\ & 9:1 & 1027.53 & 4.74 & 695.31\\
 			\hline
 			\multirow{2}{*}
 			{GRU} & 7:3 & 551.01 & 2.45 & 394.94 \\ & 8:2 & 528.28 & 2.59 & 410.19 \\ & \textbf{9:1} & \textbf{550.56} & \textbf{2.53} & \textbf{375.69}\\
 			\hline
 			\multirow{2}{*}
-			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			{MLP} & 7:3 & 1510.83 & 8.33 & 1262.15 \\ & \textbf{8:2} & \textbf{840.05} & \textbf{4.05} & \textbf{652.07} \\ & 9:1 & 974.91 & 5.36 & \textbf786.23\\
 			\hline
 		\end{tabular}
-		\caption{NVL Dataset's Evaluation}
 		\label{nvlresult}
 	\end{table}
 	
@@ -472,8 +486,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{Holt-Winters Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_HW_82.png}
+			\caption{Holt-Winters Model's Result with ratio 8:2}
 			\label{fig2.3}
 		\end{minipage}
 	\end{figure}
@@ -490,8 +504,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{RNN Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_RNN_91.png}
+			\caption{RNN Model's Result with ratio 9:1}
 			\label{fig2.5}
 		\end{minipage}
 	\end{figure}
@@ -499,8 +513,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{LSTM Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_LSTM_91.png}
+			\caption{LSTM Model's Result with ratio 9:1}
 			\label{fig2.6}
 		\end{minipage}
 	\end{figure}
@@ -508,8 +522,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{GRU Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_GRU_91.png}
+			\caption{GRU Model's Result with ratio 9:1}
 			\label{fig2.7}
 		\end{minipage}
 	\end{figure}
@@ -517,14 +531,15 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{MLP Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NVL_MLP_82.png}
+			\caption{MLP Model's Result with ratio 8:2}
 			\label{fig2.8}
 		\end{minipage}
 	\end{figure}
 	
 	\subsection{NLG dataset} 
 	\begin{table}[H]
+		\caption{NLG Dataset's Evaluation}
 		\centering
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
@@ -548,16 +563,15 @@
 			{RNN} & 7:3 & 1263.03 & 2.73 & 982.77 \\ & \textbf{8:2} & \textbf{1027.15} & \textbf{2.02} & \textbf{763.35} \\ & 9:1 & 1156.76 & 2.12 & 857.76\\
 			\hline
 			\multirow{2}{*}
-			{LSTM} & 7:3 & 1454.65 & 3.23 & 1171.78 \\ & \textbf{8:2} & \textbf{1105.64} & \textbf{2.28} & \textbf{862.08} \\ & 9:1 & 1229.90 & 2.24 &  906.03\\
+			{LSTM} & 7:3 & 1433.07 & 3.15 & 1134.99 \\ & \textbf{8:2} & \textbf{1105.64} & \textbf{2.28} & \textbf{862.08} \\ & 9:1 & 1229.90 & 2.24 &  906.03\\
 			\hline
 			\multirow{2}{*}
-			{GRU} & 7:3 & 1001.01 & 2.06 & 745.65 \\ & \textbf{8:2} & \textbf{939.75} & \textbf{1.84} & \textbf{697.10} \\ & 9:1 & 1142.09 & 2.17 & 885.35\\
+			{GRU} & \textbf{7:3} & \textbf{1001.01} & \textbf{2.06} & \textbf{745.65} \\ & 8:2 & 1127.53 & 2.33 & 883.24 \\ & 9:1 & 1456.63 & 3.07 & 1266.56\\
 			\hline
 			\multirow{2}{*}
-			{MPL} & 7:3 &  &  &  \\ & 8:2 &  &  &  \\ & \textbf{9:1} & \textbf{} & \textbf{} & \textbf{}\\
+			{MLP} & 7:3 & 1424.52 & 3.01 & 1081.71 \\ & \textbf{8:2} & \textbf{1312.64}  & \textbf{2.73} & \textbf{1034.97} \\ & 9:1 & 1506.05 & 3.09 & 1247.46\\
 			\hline
 		\end{tabular}
-		\caption{NLG Dataset's Evaluation}
 		\label{nlgresult}
 	\end{table}
 	
@@ -583,8 +597,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{Holt-Winters Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_HW_91.png}
+			\caption{Holt-Winters Model's Result with ratio 9:1}
 			\label{fig3.3}
 		\end{minipage}
 	\end{figure}
@@ -601,8 +615,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{RNN Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_RNN_82.png}
+			\caption{RNN Model's Result with ratio 8:2}
 			\label{fig3.5}
 		\end{minipage}
 	\end{figure}
@@ -610,8 +624,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{LSTM Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_LSTM_73.png}
+			\caption{LSTM Model's Result with ratio 8:2}
 			\label{fig3.6}
 		\end{minipage}
 	\end{figure}
@@ -619,8 +633,8 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{GRU Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_GRU_82.png}
+			\caption{GRU Model's Result with ratio 8:2}
 			\label{fig3.7}
 		\end{minipage}
 	\end{figure}
@@ -628,25 +642,31 @@
 		\centering
 		\begin{minipage}{0.9\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{bibliography/LN_VCB91.png}
-			\caption{MLP Model's Result with ratio ...}
+			\includegraphics[width=\linewidth]{bibliography/result/NLG_MLP_82.png}
+			\caption{MLP Model's Result with ratio 8:2}
 			\label{fig3.8}
 		\end{minipage}
 	\end{figure}
-	
+	\vspace{\baselineskip}
 	\section{Conclusion}
-	\subsection{Summary}
+	\subsection{Summary} 
 	
+	In the realm of stock price forecasting, a spectrum of methodologies has been explored, ranging from traditional statistical models to sophisticated machine learning algorithms. Among the models investigated include Linear Regression, Support Vector Machine (SVM), Auto Regressive Integrated Moving Average (ARIMA), Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent Neural Network (RNN), Holt-Winters, and Multi-layer Perceptron (MLP). It has become evident through this exploration that SVM, LSTM, GRU, RNN, and MLP emerge as the most effective models for predicting stock prices. \\
+	The intricacies of forecasting stock prices, deeply rooted in the complexity and unpredictability of financial markets, necessitate models capable of capturing subtle patterns and relationships within the data. SVM demonstrates its effectiveness in handling complex relationships, while LSTM and GRU excel in learning long-term dependencies. RNN proves adept at forecasting stock prices by leveraging sequential dependencies, and MLP offers flexibility and high accuracy in prediction models. These models consistently demonstrate superior performance across various evaluation metrics such as RMSE, MAPE, and MAE, showcasing their adaptability to navigate the inherent uncertainties of stock markets. As such, they serve as formidable tools for investors and analysts seeking reliable predictions. 
 	\subsection{Future Considerations}
-	% In our future research, it is crucial to prioritize further optimization of the previously mentioned models. This optimization effort should specifically focus on:\\
-	% \indent\textbullet\ Enhancing the accuracy of the model. While the above algorithms have demonstrated promising results in predicting stock prices, there is a need to further improve the model's accuracy to ensure more precise forecasting outcomes.\\
-	% \indent\textbullet\ Exploring alternative machine learning algorithms or ensemble techniques. Ensemble techniques, such as combining multiple models or using various ensemble learning methods, can also improve the robustness and accuracy of the forecasts.\\
-	% \indent\textbullet\ Researching new forecasting models. The field of forecasting continuously evolves, with new algorithms and models being researched and developed. It is crucial to stay updated with these approaches and explore new forecasting models that offer improved accuracy and performance. \\
-	% By continuously exploring and incorporating new features, data sources, and modeling techniques, we can strive for ongoing optimization of the forecasting models and enhance their ability to predict stock prices with greater precision and reliability.
+	In our future research, it is crucial to prioritize further optimization of the previously mentioned models. This optimization effort should specifically focus on:
+	\begin{itemize}
+		\item Enhancing the accuracy of the model. While the above algorithms have demonstrated promising results in predicting stock prices, there is a need to further improve the model's accuracy to ensure more precise forecasting outcomes.
+		\item Exploring alternative machine learning algorithms or ensemble techniques. Ensemble techniques, such as combining multiple models or using various ensemble learning methods, can also improve the robustness and accuracy of the forecasts.
+		\item Researching new forecasting models. The field of forecasting continuously evolves, with new algorithms and models being researched and developed. It is crucial to stay updated with these approaches and explore new forecasting models that offer improved accuracy and performance.
+	\end{itemize}
+	By continuously exploring and incorporating new features, data sources, and modeling techniques, we can strive for ongoing optimization of the forecasting models and enhance their ability to predict stock prices with greater precision and reliability.
+	
 	\section*{Acknowledgment}
 	\addcontentsline{toc}{section}{Acknowledgment}
-	First and foremost, we would like to express our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout the research process. Their mentorship and unwavering support have been instrumental in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail have significantly contributed to the success of this research.
-	\\This research would not have been possible without the support and contributions of our mentors. We would like to extend our heartfelt thanks to everyone involved for their invaluable assistance, encouragement, and belief in our research. Thank you all for your invaluable assistance and encouragement.
+	First and foremost, we extend our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout our research. Their mentorship and unwavering support have been pivotal in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail significantly contributed to its success.\\
+	This research would not have been possible without their support and contributions. We also express heartfelt thanks to everyone involved for their invaluable assistance, encouragement, and belief in our work. We deeply appreciate your support and encouragement.
+	
 	
 	%% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 	\begin{thebibliography}{00}
