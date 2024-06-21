@@ -248,7 +248,8 @@ In time series applications, the feature vectors \( x_i \) and \( x \) are const
 			Sigmoid & $\tanh(\gamma x_i^T x + r)$ \\ \hline
 		\end{tabular}
 	\end{table}
- Here, \( \gamma \), \( r \), and \( d \) are kernel parameters. The choice of kernel parameters needs careful consideration as they implicitly define the structure of the high-dimensional feature space \( \phi(x) \) and thus control the complexity of the final solution.
+ Here, \( \gamma \), \( r \), and \( d \) are kernel parameters. The choice of kernel parameters needs careful consideration as they implicitly define the structure of the high-dimensional feature space \( \phi(x) \) and thus control the complexity of the final solution. \\
+ In this project, the team will use the Support Vector Regression (SVR) method, a type of Support Vector Machine (SVM), for time series forecasting.
 
 	\subsection{Recurrent Neural Networks (RNN)}
 	Recurrent Neural Networks (RNNs) are a type of neural network designed to model sequence data, where order and context are crucial. They maintain a memory of previous inputs, allowing them to capture temporal dependencies, which is essential for applications like stock price prediction. RNNs analyze financial data to predict stock prices or based on historical trends. However, standard RNNs struggle with long-term dependencies due to vanishing and exploding gradients. Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks address these issues by better managing long-term  information. \cite{b11}.
