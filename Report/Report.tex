@@ -160,11 +160,6 @@
 	Simple linear regression describes the relationship between one variable's magnitude and that of another—for instance, as X increases, Y might also increase, or it could decrease. The difference is that while correlation measures the strength of an association between two variables, regression quantifies the nature of the relationship. \cite{b7}\\
 	A simple linear regression model has the form:
 	\[Y=\beta_0+\beta_1X_1\]
-	Where:\\
-	\indent\textbullet\ Y is the dependent variable (Target Variable).\\
-	\indent\textbullet\ \(X_1, X_2\) are the independent (explanatory) variables.\\
-	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
-	\indent\textbullet\ \(\beta_1\) is the regression coefficient for the independent variable.\\
 	When there are multiple predictors, the equation is extended to accommodate them: Multiple Linear Regression. Instead of a line, we now have a linear model—the relationship between each coefficient and its variable (feature) is linear.
 	\[Y=\beta_0+\beta_1 X_1+\beta_2 X_2+\cdots+\beta_k X_k+\varepsilon\]
 	Where:\\
@@ -175,7 +170,7 @@
 	\indent\textbullet\ \(\varepsilon\) is the error term.
 	
 	\subsection{ARIMA}
-	The Autoregressive Integrated Moving Average (ARIMA) \cite{b8} model utilizes time-series data and statistical analysis to interpret the data and forecast future values. ARIMA aims to understand data patterns by analyzing its past values and employs linear regression to make predictions.\\
+	The Autoregressive Integrated Moving Average (ARIMA) \cite{b8} model utilizes time-series data and statistical analysis to interpret the data and forecast future values. ARIMA aims to understand data patterns by analyzing its past values and employs linear regression to make predictions. \cite{b8}\\
 	The ARIMA model is typically denoted with the parameters (p, d, q), which can be assigned different values to modify the model and apply it in different ways.\\
 	Some of the limitations of the model are its dependency on data collection and the manual trial-and-error process required to determine parameter values that fit best. \\
 	Meaning of each component in the Arima model:\\
@@ -204,27 +199,7 @@
 	\subsection{Holt-Winters}
 	The Holt-Winters model is a time series forecasting method developed by Charles Holt and Peter Winters in 1960. It is a linear model used to forecast values in a time series with trends and seasonality that vary over time.\\
 	Holt-Winters is a model of time series behavior. Forecasting always requires a model, and Holt-Winters is a way to model three aspects of the time series: a typical value (average), a slope (trend) over time, and a cyclical repeating pattern (seasonality). \cite{b9}\\
-	The formula for the basic version of the Holt-Winters model (simple exponential smoothing) is:
-	\begin{align*}
-		F(t+1) &= \alpha Y(t) + (1-\alpha)(F(t) + T(t))
-	\end{align*}
-	Where:
-	\begin{itemize}
-		\item \( Y(t) \) is the value at time \( t \).
-		\item \( F(t) \) is the forecasted value at time \( t \).
-		\item \( T(t) \) is the trend value at time \( t \).
-		\item \( \alpha \) is the model's smoothing constant ranging from 0 to 1, determining the importance of past values for the current forecast.
-	\end{itemize}
-	
-	The formula for the enhanced version of the Holt-Winters model (Holt's linear exponential smoothing) is:
-	\begin{align*}
-		F(t+1) &= \alpha Y(t) + (1-\alpha)(F(t) + T(t)) \\
-		T(t+1) &= \beta*(F(t+1)-F(t)) + (1-\beta)*T(t)
-	\end{align*}
-	Where:
-	\begin{itemize}
-		\item \( \beta \) is the model's coefficient for trend, ranging from 0 to 1, determining the importance of trend changes for the forecast.
-	\end{itemize}
+	Holt-Winter has many types, here we will introduce Additive Holt-Winters
 	The formula for the enhanced version of the Holt-Winters model with seasonality adds a seasonal factor to the enhanced model's formula.
 	\begin{align*}
 		F(t+1) &= \alpha(Y(t) - S(t-m)) + (1-\alpha)(F(t) + T(t)) \\
@@ -233,51 +208,74 @@
 	\end{align*}
 	Where:
 	\begin{itemize}
+            \item \( Y(t) \) is the value at time \( t \).
+		\item \( F(t) \) is the forecasted value at time \( t \).
+		\item \( T(t) \) is the trend value at time \( t \).
+		\item \( \alpha \) is the model's smoothing constant ranging from 0 to 1, determining the importance of past values for the current forecast.
 		\item \( S(t-m) \) is the seasonal value at time \( t-m \), with \( m \) being the number of repetitions in the seasonal cycle.
 		\item \( \gamma \) is the model's coefficient for seasonality, ranging from 0 to 1, determining the importance of seasonal changes for the forecast.
 	\end{itemize}
 	
 	\subsection{Support Vector Machine - SVM}
-	Support Vector Regression (SVR) is a type of machine learning algorithm used for regression analysis. The goal of SVR is to find a function that approximates the relationship between the input variables and a continuous target variable, while minimizing the prediction error. \\
-	Support Vector Regression (SVR) uses the same principle as SVM, but for regression problems.\\
-	SVR can handle non-linear relationships between the input variables and the target variable by using a kernel function to map the data to a higher-dimensional space. This makes it a powerful tool for regression tasks where there may be complex relationships between the input variables and the target variable. \cite{b10}
+	SVM is used for various purposes, particularly in classification and regression problems and it can be especially useful in time series forecasting. The method SVM uses in time series is similar to classification: data is mapped to a higher-dimensional space and separated using a maximum-margin hyperplane. However, in time series forecasting, the goal is to find a function that can accurately predict future values. \\
+    The idea of building an SVM to approximate a function involves mapping the data \( x \) into a high-dimensional feature space and then performing linear regression in that space. \\
+The general formula commonly used in the Support Vector Machine (SVM) method: \cite{b10}
+\[ y(x) = \sum_{i=1}^{N} (a_i - a_i^*) K(x_i, x) + b \]    
+Where:
+\begin{itemize}
+    \item \( y(x) \) is the predicted value for a new data point \( x \).
+    \item \( N \) is the number of data points in the training set.
+    \item \( a_i \) and \( a_i^* \) are the Lagrange multipliers from the SVM optimization problem.
+    \item \( x_i \) are the data points in the training set.
+    \item \( K(x_i, x) \) is the kernel function, which measures the similarity between the data point \( x_i \) and \( x \).
+    \item \( b \) is the bias term.
+\end{itemize}
+
+For the SVM problem, the kernel function \( K(x_i, x) \) maps data points into a higher-dimensional space, enabling non-linear classification or regression.
+
+In time series applications, the feature vectors \( x_i \) and \( x \) are constructed differently, often including lag values or other extracted features.
+
 	\begin{table}[H]
 		\centering
 		% \captionsetup{justification=centering}
-		\caption{Kernels used in the Support Vector Machine}
+		\caption{Some kernels used in the Support Vector Machine}
 		\begin{tabular}{|c|c|}
 			\hline
 			\textbf{Kernel} & \textbf{Equation} \\ \hline
-			Linear & ${x^T z}$ \\ \hline
-			Polynomial & $\left( r + \gamma {x^T z} \right)^d$ \\ \hline
-			RBF & $\exp \left( -\gamma \frac{\|x - z\|_2^2}{2\sigma^2} \right), \gamma > 0$ \\ \hline
-			Sigmoid & $\tanh \left( \gamma {x^T z} + r \right)$ \\ \hline
+			Linear & ${x_i^T x}$ \\ \hline
+			Polynomial & $(\gamma x_i^T x + r)^d, \gamma > 0$ \\ \hline
+			RBF & $\exp \left( - \frac{\|x - x_i\|}{2\gamma} \right),  \gamma > 0$ \\ \hline
+			Sigmoid & $\tanh(\gamma x_i^T x + r)$ \\ \hline
 		\end{tabular}
 	\end{table}
-	
+ Here, \( \gamma \), \( r \), and \( d \) are kernel parameters. The choice of kernel parameters needs careful consideration as they implicitly define the structure of the high-dimensional feature space \( \phi(x) \) and thus control the complexity of the final solution.
+
 	\subsection{Recurrent Neural Networks (RNN)}
-	Recurrent Neural Networks (RNN) are a type of neural network designed to process sequential data. They analyze data with a temporal dimension, such as time series, speech, and text. RNNs achieve this by using a hidden state that is passed from one timestep to the next, allowing information to persist and be utilized across different points in the sequence \cite{b11}.
+	Recurrent Neural Networks (RNNs) are a type of neural network designed to model sequence data, where order and context are crucial. They maintain a memory of previous inputs, allowing them to capture temporal dependencies, which is essential for applications like stock price prediction. RNNs analyze financial data to predict stock prices or based on historical trends. However, standard RNNs struggle with long-term dependencies due to vanishing and exploding gradients. Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks address these issues by better managing long-term  information. \cite{b11}.
 	\begin{figure}[H] % Use [H] to force the figure to stay here
 		\centering
-		\includegraphics[scale=0.4]{bibliography/material/RNN_process.png}
-		\caption{Source: Quora.com}
+		\includegraphics[scale=0.4]{bibliography/material/RNN.png}
+		\caption{Architecture and Working of RNN}
 	\end{figure}
-	\noindent All inputs and outputs in standard neural networks operate independently from each other. However, in certain situations, such as predicting the next word in a phrase, the preceding words are essential, necessitating the retention of previous words.\\
-	RNNs possess a memory that retains all information related to the calculations. They use the same parameters for each input because they achieve consistent outcomes by performing the same operations on all inputs or hidden layers \cite{b12}.
+	\noindent RNNs possess a memory that retains all information related to the calculations. They use the same parameters for each input because they achieve consistent outcomes by performing the same operations on all inputs or hidden layers \cite{b12}.
 	
 	\subsection{Long short-term memory (LSTM)}
-	Long Short-Term Memory (LSTM) is a type of recurrent neural network (RNN) architecture in deep learning. Unlike standard feedforward neural networks, LSTMs incorporate feedback connections, enabling them to utilize temporal dependencies in data sequences.\\ 
-	They are designed to handle the problem of diminishing or exploding gradients that can arise when training traditional RNNs on sequential data. This makes LSTMs particularly well-suited for tasks involving sequential data, such as natural language processing, speech recognition, and time series forecasting \cite{b13}.
+	Long Short-Term Memory (LSTM) is a type of recurrent neural network (RNN) architecture in deep learning. Unlike standard feed forward neural networks, LSTMs incorporate feedback connections, enabling them to utilize temporal dependencies in data sequences.\\ 
+	They are designed to handle the problem of diminishing or exploding gradients that can arise when training traditional RNNs on sequential data. This makes LSTMs particularly well-suited for tasks involving sequential data, such as natural language processing, speech recognition, and time series forecasting \cite{b13}.\\
+        A typical LSTM cell is illustrated as follows:
 	\begin{figure}[H] % Use [H] to force the figure to stay here
 		\centering
-		\includegraphics[scale=0.4]{bibliography/material/lstm.png}
+		\includegraphics[scale=0.35]{bibliography/material/LSTM.png}
 		\caption{Architecture and Working of LSTM}
 	\end{figure}
 	\noindent \textbf{Forget Gate}: $f_t = (W_f[h_{t-1}, x_t] + b_f$ \\
 	\textbf{Input Gate}: $i_t = (W_i[h_{t-1}, x_t] + b_i$ \\
 	\textbf{Output Gate}: $o_t = (W_o[h_{t-1}, x_t] + b_o$\\
 	\textbf{Temporary cell state}: \[\tilde{C}_t = \tanh(W_c[h_{t-1}, x_t] + b_c\]
-	\textbf{Current cell state}: $C_t = f_t * C_{t-1} + i_t * \tilde{C}_t$ \cite{b14}
+	\textbf{Current cell state}: $C_t = f_t * C_{t-1} + i_t * \tilde{C}_t$ \cite{b14}\\
+        The structure of hidden layer is LSTM which uses cells with control gates such as the input gate, forget gate, and output gate to regulate the flow of information. The cell state is an important component that helps store information over long periods of time. Therefore, the role of the hidden layer is Hidden layers in LSTM are capable of storing and managing long-term information thanks to the gate mechanism, helping to overcome the vanishing gradient problem and allowing the model to learn long-term dependencies.\\
+        Note that the above is only one design of the LSTM.
+        There are multiple variations in the literature. 
 	
 	\subsection{Gated Recurrent Unit (GRU)}
 	The Gated Recurrent Unit (GRU) is a specialized type of recurrent neural network (RNN) designed to address the limitations of traditional RNNs, such as the vanishing gradient problem. GRUs have proven effective in a variety of applications, including natural language processing, speech recognition, and time series prediction \cite{b15}.
@@ -290,7 +288,6 @@
 	The primary difference between GRU and LSTM lies in how they manage the memory cell state. In LSTM, the memory cell state is maintained separately from the hidden state and updated using three gates: the input gate, output gate, and forget gate. In contrast, GRU replaces the memory cell state with a “candidate activation vector,” which is updated using two gates: the reset gate and the update gate \cite{b16}.
 	
 	\subsection{Multilayer Perceptron (MLP)}
-	
 	A MultiLayer Perceptron (MLP) Neural Network is a type of feedforward artificial neural network with multiple layers, including an input layer, one or more hidden layers, and an output layer.\\
 	\begin{figure}[H] % Use [H] to force the figure to stay here
 		\centering
@@ -299,7 +296,7 @@
 	\end{figure}
 	The input layer receives input from the dataset, the hidden layer processes computations using activation functions, and the output layer provides the estimated output. Each layer is fully connected to the next, and it utilizes the BackPropagation algorithm for training.\\
 	The input nodes pass data to the hidden layer, where computations are performed using weighted edges and activation functions. The output is then generated and compared with the actual output, and the BackPropagation algorithm is used to adjust weights and reduce error. \\
-	The MLP Neural Network is widely used in various applications such as image classification and regression prediction. Its effectiveness depends on the problem type and dataset characteristics. \cite{b17} \\
+	The MLP Neural Network is widely used in various applications such as regression prediction. Its effectiveness depends on the problem type and dataset characteristics. \cite{b17} \\
 	
 	
 	\section{Result}
@@ -685,9 +682,9 @@
 		\bibitem{b6} C. Syavasya and A. L. Muddana, "Machine learning based Time series prediction using Holt-Winters Exponential Smoothing with Multiplicative Seasonality," IEEE, doi:10.1109/ICEECCOT52851.2021.9708006.
 		\bibitem{b7} P. Bruce, A. Bruce, and P. Gedeck, Practical Statistics for Data Scientists: 50+ Essential Concepts Using r and Python. Sebastopol, CA: O’Reilly Media, 2020. 
 		\bibitem{b8} “Autoregressive Integrated moving average (ARIMA),” Corporate Finance Institute, https://corporatefinanceinstitute.com/resources/data-science/autoregressive-integrated-moving-average-arima/ (accessed May 5, 2024). 
-		\bibitem{b9} “Autoregressive Integrated moving average (ARIMA),” Corporate Finance Institute, https://corporatefinanceinstitute.com/resources/data-science/autoregressive-integrated-moving-average-arima/ (accessed May 5, 2024).
-		\bibitem{b10} A. Sethi, “Support vector regression tutorial for machine learning,” Analytics Vidhya, https://www.analyticsvidhya.com/blog/2020/03/support-vector-regression-tutorial-for-machine-learning/ (accessed May 15, 2024). 
-		\bibitem{b11} D. Kalita, “A brief overview of recurrent neural networks (RNN),” Analytics Vidhya, https://www.analyticsvidhya.com/blog/2022/03/a-brief-overview-of-recurrent-neural-networks-rnn/ (accessed May 29, 2024). 
+		\bibitem{b9} “7.3 Holt-Winters’ seasonal method,” Otexts.com. [Online]. Available: https://otexts.com/fpp2/holt-winters.html. [Accessed: 21-Jun-2024].
+		\bibitem{b10} Okasha, Mahmoud. (2014). Using Support Vector Machines in Financial Time Series Forecasting. International Journal of Statistics and Applications. 4. 28-39. 10.5923/j.statistics.20140401.03. 
+		\bibitem{b11} A. Kadlaskar, “Time series analysis recurrence neural network in python!,” Analytics Vidhya, 24-Jun-2021. [Online]. Available: https://www.analyticsvidhya.com/blog/2021/06/time-series-analysis-recurrence-neural-network-in-python/. [Accessed: 21-Jun-2024].
 		\bibitem{b12} J. Nabi, “Recurrent neural networks (rnns),” Medium, https://towardsdatascience.com/recurrent-neural-networks-rnns-3f06d7653a85 (accessed May 29, 2024). 
 		\bibitem{b13} R. Hamad, “What is LSTM? Introduction to Long Short-Term Memory,” Medium, Dec. 11, 2023. https://medium.com/@rebeen.jaff/what-is-lstm-introduction-to-long-short-term-memory-66bd3855b9ce (accessed May 29, 2024).
 		\bibitem{b14} A. Chugh, “Deep Learning | Introduction to Long Short Term Memory,” GeeksforGeeks, Jan. 16, 2019. https://www.geeksforgeeks.org/deep-learning-introduction-to-long-short-term-memory/ (accessed May 29, 2024).
