@@ -12,7 +12,7 @@ No. | Student ID | Full Name
 3 | 21521449 | Phi Quang Thanh
 
 ## Project Information
-* Project Title: Forecasting the stock prices of vietnamese real estate companies using statistical models and machine learning algorithms
+* Project Title: **Forecasting stock prices of Vietnamese real estate companies: A comparative analysis of statistical, machine learning, and deep learning techniques**
 * Dataset: 
     * [VHM - Vinhomes JSC](https://www.investing.com/equities/vinhomes)
     * [NVL - No Va Land Investment Group Corp](https://www.investing.com/equities/no-va-land-investment-group-corp)
@@ -35,3 +35,4 @@ No. | Student ID | Full Name
 6. Week 6 - Evaluation and predict 30 days: All members with their models
 7. Week 7 - Evaluation and predct 60, 90 days: All members with their models
 8. Week 8 - Final Report: All members
+--The end--
