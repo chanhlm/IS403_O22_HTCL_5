@@ -13,10 +13,11 @@ No. | Student ID | Full Name
 
 ## Project Information
 * Project Title: **Forecasting stock prices of Vietnamese real estate companies: A comparative analysis of statistical, machine learning, and deep learning techniques**
-* Dataset: 
+* Datasets: 
     * [VHM - Vinhomes JSC](https://www.investing.com/equities/vinhomes)
     * [NVL - No Va Land Investment Group Corp](https://www.investing.com/equities/no-va-land-investment-group-corp)
     * [NLG - Nam Long Investment Corp](https://www.investing.com/equities/nam-long-investment-corp)
+* Algorithms: Linear Regression, Support Vector Machine (SVM), ARIMA, Long Short-Term Memory (LSTM), Gated Recurrent Unit (GRU), Recurrent Neural Network (RNN), Holt-Winters, Multi-layer Perceptron (MLP)
 
 ## Work Distribution
 1. Week 1 - Collecting Data: All members
